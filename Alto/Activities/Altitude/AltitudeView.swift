@@ -15,15 +15,14 @@ struct AltitudeView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: -80) {
-            Text("\(altitude)")
+        VStack(alignment: .leading, spacing: -50) {
+            Text("\(1000)")
                 .contentTransition(.numericText(value: Double(altitude)))
                 .font(.custom("AkiLines", size: 360))
                 .minimumScaleFactor(0.3)
             
             Text("meters")
                 .font(.system(size: 100).weight(.ultraLight))
-                .padding(.leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.default, value: altitude)

@@ -17,6 +17,16 @@ final class AltitudeService {
     private(set) var absoluteAltitude = 0.0
     private(set) var pressure = 0.0
     
+    private(set) var trackingAbsoluteAltitude = false {
+        didSet {
+            if trackingAbsoluteAltitude {
+                logger.info("Started absolute altitude updates.")
+            } else {
+                logger.info("Stopped absolute altitude updates.")
+            }
+        }
+    }
+    
     private let altimeter: CMAltimeter
     
     init() {
@@ -24,6 +34,11 @@ final class AltitudeService {
     }
     
     func startAbsoluteAltitudeUpdates() {
+        guard !trackingAbsoluteAltitude else {
+            logger.warning("Tried to start absolute altitude updates while already tracking absolute altitude data.")
+            return
+        }
+        
         altimeter.startAbsoluteAltitudeUpdates(to: .main) { [weak self] data, error in
             guard let self else { return }
             guard handleUpdateError(error) == false else { return }
@@ -31,7 +46,7 @@ final class AltitudeService {
             updateAltitude(with: data)
         }
         
-        logger.info("Started absolute altitude updates.")
+        trackingAbsoluteAltitude = true
     }
     
     private func updateAltitude(with data: CMAbsoluteAltitudeData?) {
@@ -53,8 +68,15 @@ final class AltitudeService {
     }
     
     func stopAbsoluteAltitudeUpdates() {
+        guard trackingAbsoluteAltitude else {
+            logger.warning("Tried to stop absolute altitude updates without having started tracking altitude data.")
+            
+            return
+        }
+        
         altimeter.stopAbsoluteAltitudeUpdates()
-        logger.info("Stopped absolute altitude updates.")
+        trackingAbsoluteAltitude = false
+        
     }
     
     func authorizationStatus() -> CMAuthorizationStatus {
