@@ -19,7 +19,7 @@ struct AltoApp: App {
                 .onChange(of: scenePhase) {
                     switch scenePhase {
                     case .inactive: altitudeService.startAbsoluteAltitudeUpdates()
-                    case .active: altitudeService.stopAbsoluteAltitudeUpdates()
+                    case .background: altitudeService.stopAbsoluteAltitudeUpdates()
                     default: break
                     }
                 }
