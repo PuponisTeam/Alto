@@ -10,9 +10,22 @@
 		6C0A50DD2D7898C200D023F3 /* Alto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6C414BAA2D7B5B9C000354E9 /* Exceptions for "Alto" folder in "Alto" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6C0A50DC2D7898C200D023F3 /* Alto */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6C0A50DF2D7898C200D023F3 /* Alto */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6C414BAA2D7B5B9C000354E9 /* Exceptions for "Alto" folder in "Alto" target */,
+			);
 			path = Alto;
 			sourceTree = "<group>";
 		};
@@ -255,6 +268,7 @@
 				DEVELOPMENT_TEAM = 6N3WR99Z4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Alto/Info.plist;
 				INFOPLIST_KEY_NSMotionUsageDescription = "The app needs to use the barometer in your iPhone to display altitude data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -285,6 +299,7 @@
 				DEVELOPMENT_TEAM = 6N3WR99Z4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Alto/Info.plist;
 				INFOPLIST_KEY_NSMotionUsageDescription = "The app needs to use the barometer in your iPhone to display altitude data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
