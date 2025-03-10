@@ -16,7 +16,7 @@ struct AltitudeView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: -50) {
-            Text("\(1000)")
+            Text("\(altitude)")
                 .contentTransition(.numericText(value: Double(altitude)))
                 .font(.custom("AkiLines", size: 360))
                 .minimumScaleFactor(0.3)
