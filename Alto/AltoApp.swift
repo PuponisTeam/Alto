@@ -16,10 +16,12 @@ struct AltoApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.altitudeService, altitudeService)
-                .onAppear(perform: altitudeService.startAbsoluteAltitudeUpdates)
+//                .onAppear(perform: altitudeService.startAbsoluteAltitudeUpdates)
                 .onChange(of: scenePhase) {
-                    if case .background = scenePhase {
-                        altitudeService.stopAbsoluteAltitudeUpdates()
+                    switch scenePhase {
+                    case .active: altitudeService.startAbsoluteAltitudeUpdates()
+                    case .background: altitudeService.stopAbsoluteAltitudeUpdates()
+                    default: break
                     }
                 }
         }

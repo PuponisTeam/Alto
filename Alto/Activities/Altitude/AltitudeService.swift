@@ -34,15 +34,15 @@ final class AltitudeService {
     }
     
     func startAbsoluteAltitudeUpdates() {
-        guard !trackingAbsoluteAltitude else {
-            logger.warning("Tried to start absolute altitude updates while already tracking absolute altitude data.")
-            return
-        }
+        guard !trackingAbsoluteAltitude else { return }
         
         altimeter.startAbsoluteAltitudeUpdates(to: .main) { [weak self] data, error in
-            guard let self else { return }
-            guard handleUpdateError(error) == false else { return }
+            guard let self else {
+                logger.error("'AltitudeService' instance not avaliable while trying to start absolute altitude updates.")
+                return
+            }
             
+            guard handleUpdateError(error) == false else { return }
             updateAltitude(with: data)
         }
         
@@ -53,8 +53,6 @@ final class AltitudeService {
         guard let data else { return }
         absoluteAltitude = data.altitude
     }
-    
-    
     
     /// Logs eventual errors during altimeter updates. Called inside ´CMAltimiter.startAbsoluteAltitudeUpdates´ handler closure.
     /// - Parameter error: The error parameter given by the ´CMAltimiter.startAbsoluteAltitudeUpdates´ closure.
@@ -68,15 +66,10 @@ final class AltitudeService {
     }
     
     func stopAbsoluteAltitudeUpdates() {
-        guard trackingAbsoluteAltitude else {
-            logger.warning("Tried to stop absolute altitude updates without having started tracking altitude data.")
-            
-            return
-        }
+        guard trackingAbsoluteAltitude else { return }
         
         altimeter.stopAbsoluteAltitudeUpdates()
         trackingAbsoluteAltitude = false
-        
     }
     
     func authorizationStatus() -> CMAuthorizationStatus {
@@ -87,5 +80,3 @@ final class AltitudeService {
         CMAltimeter.isAbsoluteAltitudeAvailable()
     }
 }
-
-

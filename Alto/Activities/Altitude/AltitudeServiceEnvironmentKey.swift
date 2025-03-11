@@ -1,5 +1,5 @@
 //
-//  AltitudeService+EnvironmentKey.swift
+//  AltitudeServiceEnvironmentKey.swift
 //  Alto
 //
 //  Created by Alessio Garzia Marotta Brusco on 10/03/25.
@@ -16,8 +16,4 @@ extension EnvironmentValues {
         get { self[AltitudeServiceEnvironmentKey.self] }
         set { self[AltitudeServiceEnvironmentKey.self] = newValue }
     }
-}
-
-extension AltitudeView {
-    static let environmentKey = AltitudeServiceEnvironmentKey.self
 }
