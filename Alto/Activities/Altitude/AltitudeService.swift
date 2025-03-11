@@ -14,7 +14,7 @@ private let logger = Logger(subsystem: "Alto", category: "Altimeter Service")
 @MainActor
 @Observable
 final class AltitudeService {
-    private(set) var absoluteAltitude = 0.0
+    private(set) var absoluteAltitude = LocalizedLength(meters: 0)
     private(set) var pressure = 0.0
     
     private(set) var trackingAbsoluteAltitude = false {
@@ -51,7 +51,7 @@ final class AltitudeService {
     
     private func updateAltitude(with data: CMAbsoluteAltitudeData?) {
         guard let data else { return }
-        absoluteAltitude = data.altitude
+        absoluteAltitude = .meters(data.altitude)
     }
     
     /// Logs eventual errors during altimeter updates. Called inside ´CMAltimiter.startAbsoluteAltitudeUpdates´ handler closure.

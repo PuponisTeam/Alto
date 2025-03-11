@@ -10,22 +10,18 @@ import SwiftUI
 struct AltitudeView: View {
     @Environment(\.altitudeService) private var altitudeService
     
-    var altitude: Int {
-        Int(altitudeService.absoluteAltitude.rounded())
-    }
-    
     var body: some View {
         VStack(alignment: .leading, spacing: -50) {
-            Text("\(altitude)")
-                .contentTransition(.numericText(value: Double(altitude)))
+            Text("\(altitudeService.absoluteAltitude.displayValue)")
+                .contentTransition(.numericText(value: Double(altitudeService.absoluteAltitude.displayValue)))
                 .font(.custom("AkiLines", size: 360))
                 .minimumScaleFactor(0.3)
             
-            Text("meters")
+            Text(altitudeService.absoluteAltitude.formattedUnit(width: .wide))
                 .font(.system(size: 100).weight(.ultraLight))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .animation(.default, value: altitude)
+        .animation(.default, value: altitudeService.absoluteAltitude)
         .foregroundStyle(.offBlack)
     }
 }
