@@ -8,29 +8,16 @@
 import SwiftUI
 
 struct DetailsButton: View {
-    @Binding var isCompact: Bool
+    let action: () -> Void
     
     var body: some View {
-        Button(action: toggleIsCompact) {
-            HStack {
-                Image(systemName: isCompact ? "arrow.down.forward.and.arrow.up.backward" : "mountain.2.fill")
-                
-                if !isCompact {
-                    Text("show.details.button.label")
-                }
-            }
+        Button(action: action) {
+            Label("show.details.button.label", systemImage: "mountain.2.fill")
             .font(.headline)
-            .labelStyle(isCompact ? AnyLabelStyle(.titleAndIcon) : AnyLabelStyle(.titleAndIcon))
             
         }
-        .buttonBorderShape(.roundedRectangle(radius: isCompact ? 60 : 16))
-        .buttonStyle(.materialProminent(padding: isCompact ? 8 : 16))
-    }
-    
-    private func toggleIsCompact() {
-        withAnimation {
-            isCompact.toggle()
-        }
+        .buttonBorderShape(.roundedRectangle(radius: 16))
+        .buttonStyle(.materialProminent(padding: 16))
     }
 }
 
@@ -39,6 +26,6 @@ struct DetailsButton: View {
     
     ZStack {
         Color(.customOrange).ignoresSafeArea()
-        DetailsButton(isCompact: $isCompact)
+        DetailsButton { }
     }
 }

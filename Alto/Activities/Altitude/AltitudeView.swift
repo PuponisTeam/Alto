@@ -33,9 +33,23 @@ struct AltitudeView: View {
                 .ignoresSafeArea()
                 .noiseEffect(opacity: 0.085)
         }
-        .overlay(alignment: isCompact ? .topTrailing : .bottom) {
-            DetailsButton(isCompact: $isCompact)
-                .padding(isCompact ? 15 : 0)
+        .overlay(alignment: .bottom) {
+            if !isCompact {
+                DetailsButton {
+                    withAnimation {
+                        isCompact = true
+                    }
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .contentShape(.rect)
+        .onTapGesture {
+            if isCompact {
+                withAnimation {
+                    isCompact = false
+                }
+            }
         }
     }
     
