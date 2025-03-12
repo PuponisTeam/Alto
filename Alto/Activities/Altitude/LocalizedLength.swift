@@ -6,7 +6,7 @@
 //
 
 import OSLog
-import Foundation
+import SwiftUI
 
 fileprivate let logger = Logger(subsystem: "Alto", category: "Localized Length")
 
@@ -40,25 +40,21 @@ struct LocalizedLength: Equatable {
     // Tremendo but funziona.
     func formattedUnit(
         width: Measurement<UnitLength>.FormatStyle.UnitWidth
-    ) -> String {
+    ) -> LocalizedStringKey {
         var measurementCopy = mesurament
         measurementCopy.value = Double(displayValue)
         let string = measurementCopy.formatted(.measurement(width: width, usage: .asProvided))
         
         do {
             let regex = try Regex("\\d+ ")
-            return string.replacing(regex, with: "")
+            return LocalizedStringKey(string.replacing(regex, with: ""))
         } catch {
             logger.error("Failed to create regex while formatting unit. Error: \(error)")
-            return string
+            return LocalizedStringKey(string)
         }
     }
     
     static func meters(_ meters: Double) -> LocalizedLength {
         LocalizedLength(meters: meters)
-    }
-    
-    static func digitConverted(_ value: Double) -> Int {
-        Int(value.rounded())
     }
 }
