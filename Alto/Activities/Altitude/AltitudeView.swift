@@ -62,6 +62,7 @@ struct AltitudeView: View {
             
             Text(altitudeService.absoluteAltitude.formattedUnit(width: .wide))
                 .font(.system(size: isCompact ? 70 : 100).weight(.ultraLight))
+                .padding(.top, isCompact ? -86 : nil)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.default, value: altitudeService.absoluteAltitude)
@@ -71,6 +72,6 @@ struct AltitudeView: View {
 }
 
 #Preview {
-    @Previewable @State var isCompact = false
+    @Previewable @State var isCompact = true
     AltitudeView(isCompact: $isCompact)
 }

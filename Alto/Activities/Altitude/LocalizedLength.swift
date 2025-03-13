@@ -46,7 +46,7 @@ struct LocalizedLength: Equatable {
         let string = measurementCopy.formatted(.measurement(width: width, usage: .asProvided))
         
         do {
-            let regex = try Regex("\\d+ ")
+            let regex = try Regex("[-]?\\d+ ")
             return LocalizedStringKey(string.replacing(regex, with: ""))
         } catch {
             logger.error("Failed to create regex while formatting unit. Error: \(error)")

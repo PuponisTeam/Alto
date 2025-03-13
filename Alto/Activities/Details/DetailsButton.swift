@@ -17,7 +17,7 @@ struct DetailsButton: View {
             
         }
         .buttonBorderShape(.roundedRectangle(radius: 16))
-        .buttonStyle(.materialProminent(padding: 16))
+        .buttonStyle(.pressable)
     }
 }
 
