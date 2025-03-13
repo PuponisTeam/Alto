@@ -4,6 +4,9 @@
     "%lld" : {
 
     },
+    "Ciao" : {
+
+    },
     "Feet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69,6 +72,9 @@
           }
         }
       }
+    },
+    "Pressure" : {
+
     },
     "show.details.button.label" : {
       "localizations" : {
