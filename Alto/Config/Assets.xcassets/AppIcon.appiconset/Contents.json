@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconNotGoodEnoughForCH5.png",
+      "filename" : "LightModeOrangeDef.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "DarkModeOrangeDef.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
