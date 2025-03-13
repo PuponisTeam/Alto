@@ -61,7 +61,7 @@ struct AltitudeView: View {
                 .minimumScaleFactor(0.3)
             
             Text(altitudeService.absoluteAltitude.formattedUnit(width: .wide))
-                .font(.system(size: isCompact ? 80 : 100).weight(.ultraLight))
+                .font(.system(size: isCompact ? 70 : 100).weight(.ultraLight))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.default, value: altitudeService.absoluteAltitude)
