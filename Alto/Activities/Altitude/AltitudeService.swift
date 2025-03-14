@@ -9,13 +9,18 @@ import CoreMotion
 import Foundation
 import OSLog
 
-private let logger = Logger(subsystem: "Alto", category: "Altimeter Service")
+private let logger = Logger(subsystem: "Alto", category: "Altitude Service")
 
 @MainActor
 @Observable
 final class AltitudeService {
+    private enum TrackedValue: String {
+        case absoluteAltitude = "altitude"
+        case pressure = "pressure"
+    }
+    
     private(set) var absoluteAltitude = LocalizedLength(meters: 0)
-    private(set) var pressure = 0.0
+    private(set) var pressure = Measurement(value: 0, unit: UnitPressure.kilopascals)
     
     private(set) var trackingAbsoluteAltitude = false {
         didSet {
@@ -23,6 +28,16 @@ final class AltitudeService {
                 logger.info("Started absolute altitude updates.")
             } else {
                 logger.info("Stopped absolute altitude updates.")
+            }
+        }
+    }
+    
+    private(set) var trackingPressure = false {
+        didSet {
+            if trackingPressure {
+                logger.info("Started pressure updates.")
+            } else {
+                logger.info("Stopped pressure updates.")
             }
         }
     }
@@ -42,7 +57,7 @@ final class AltitudeService {
                 return
             }
             
-            guard handleUpdateError(error) == false else { return }
+            guard handleUpdateError(error, tracking: .absoluteAltitude) == false else { return }
             updateAltitude(with: data)
         }
         
@@ -50,19 +65,12 @@ final class AltitudeService {
     }
     
     private func updateAltitude(with data: CMAbsoluteAltitudeData?) {
-        guard let data else { return }
-        absoluteAltitude = .meters(data.altitude)
-    }
-    
-    /// Logs eventual errors during altimeter updates. Called inside ´CMAltimiter.startAbsoluteAltitudeUpdates´ handler closure.
-    /// - Parameter error: The error parameter given by the ´CMAltimiter.startAbsoluteAltitudeUpdates´ closure.
-    /// - Returns: Boolean value representing if an error was indeed found.
-    @discardableResult
-    private func handleUpdateError(_ error: (any Error)?) -> Bool {
-        guard let error else { return false }
+        guard let data else {
+            logger.error("Found nil value trying to update absolute altitude data.")
+            return
+        }
         
-        logger.error("Failed to update altitude. Error: \(error.localizedDescription).")
-        return true
+        absoluteAltitude = .meters(data.altitude)
     }
     
     func stopAbsoluteAltitudeUpdates() {
@@ -72,11 +80,55 @@ final class AltitudeService {
         trackingAbsoluteAltitude = false
     }
     
+    func startPressureUpdates() {
+        guard !trackingPressure else { return }
+        
+        altimeter.startRelativeAltitudeUpdates(to: .main) { [weak self] data, error in
+            guard let self else {
+                logger.error("'AltitudeService' instance not avaliable while trying to start pressure updates.")
+                return
+            }
+            
+            guard handleUpdateError(error, tracking: .pressure) == false else { return }
+            updatePressure(with: data)
+            
+        }
+    }
+    
+    private func updatePressure(with data: CMAltitudeData?) {
+        guard let data else {
+            logger.error("Found nil value trying to update pressure data.")
+            return
+        }
+        
+        pressure.value = data.pressure.doubleValue
+    }
+    
+    func stopPressureUpdates() {
+        guard !trackingPressure else { return }
+        
+        altimeter.stopRelativeAltitudeUpdates()
+        trackingPressure = false
+    }
+    
+    /// Logs eventual errors during altimeter updates. Called inside ´CMAltimiter.startAbsoluteAltitudeUpdates´  and ´CMAltimiter.startRelativeAltitudeUpdates´  handler closures.
+    /// - Parameters:
+    ///   - error: The error parameter given by the updates closure.
+    ///   - value: The value that was being tracked while handling the error.
+    /// - Returns: Boolean value representing if an error was indeed found.
+    @discardableResult
+    private func handleUpdateError(_ error: (any Error)?, tracking value: TrackedValue) -> Bool {
+        guard let error else { return false }
+        
+        logger.error("Failed to update \(value.rawValue). Error: \(error.localizedDescription).")
+        return true
+    }
+    
     func authorizationStatus() -> CMAuthorizationStatus {
         CMAltimeter.authorizationStatus()
     }
     
     func isAvailable() -> Bool {
-        CMAltimeter.isAbsoluteAltitudeAvailable()
+        CMAltimeter.isAbsoluteAltitudeAvailable() && CMAltimeter.isRelativeAltitudeAvailable()
     }
 }

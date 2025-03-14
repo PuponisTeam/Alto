@@ -9,14 +9,6 @@ import SwiftUI
 
 // Pressione, Modello 3D, Ossigeno, UV.
 
-extension DetailsView {
-    var details: [DetailItem] {
-        [
-            .init(title: "Pressure", measurement: Measurement(value: 3, unit: UnitPressure.hectopascals), foregroundColor: .blue, backgroundColor: .yellow),
-        ]
-    }
-}
-
 struct DetailsView: View {
     static let spacing = 10.0
     

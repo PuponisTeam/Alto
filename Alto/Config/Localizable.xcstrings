@@ -29,9 +29,6 @@
         }
       }
     },
-    "Hello, world!" : {
-
-    },
     "Meter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -75,9 +72,6 @@
           }
         }
       }
-    },
-    "Pressure" : {
-
     },
     "show.details.button.label" : {
       "localizations" : {

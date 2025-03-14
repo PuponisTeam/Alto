@@ -72,6 +72,6 @@ struct AltitudeView: View {
 }
 
 #Preview {
-    @Previewable @State var isCompact = true
+    @Previewable @State var isCompact = false
     AltitudeView(isCompact: $isCompact)
 }
