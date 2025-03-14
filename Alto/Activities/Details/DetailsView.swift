@@ -10,10 +10,28 @@ import SwiftUI
 // Pressione, Modello 3D, Ossigeno, UV.
 
 struct DetailsView: View {
-    static let spacing = 10.0
+    static let spacing = 20.0
     
     var body: some View {
-        Text("Ciao")
+        Grid(
+            horizontalSpacing: Self.spacing,
+            verticalSpacing: Self.spacing
+        ) {
+            GridRow {
+                PressureTile()
+                PressureTile()
+            }
+            
+            GridRow {
+                PressureTile()
+                PressureTile()
+            }
+            
+            GridRow {
+                PressureTile()
+                PressureTile()
+            }
+        }
     }
 }
 

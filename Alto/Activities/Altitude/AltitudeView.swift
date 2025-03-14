@@ -7,26 +7,41 @@
 
 import SwiftUI
 
+// TODO: Add sensoryFeedback
+
 struct AltitudeView: View {
+    let altitudeService: AltitudeService
+    
     @Binding var isCompact: Bool
-    @Environment(\.altitudeService) private var altitudeService
+    @State private var altitude: Int
+    
+    init(service altitudeService: AltitudeService, isCompact: Binding<Bool>) {
+        self.altitudeService = altitudeService
+        
+        _isCompact = isCompact
+        altitude = altitudeService.absoluteAltitude.displayValue
+    }
     
     var layout: AnyLayout {
         isCompact
-        ? AnyLayout(HStackLayout(alignment: .bottom))
-        : AnyLayout(VStackLayout(alignment: .leading, spacing: -100))
+        ? AnyLayout(HStackLayout(alignment: .firstTextBaseline))
+        : AnyLayout(VStackLayout(alignment: .leading, spacing: -80))
     }
     
     var body: some View {
         VStack {
+            if !isCompact {
+                Spacer()
+            }
+            
             altitudeText
                 .padding(isCompact ? 20 : 0)
             
             if !isCompact {
-                Spacer()
+                Spacer(minLength: 250)
             }
         }
-        .frame(maxHeight: isCompact ? 150 : .infinity)
+        .frame(maxWidth: isCompact ? 350 : .infinity, maxHeight: isCompact ? 155 : .infinity)
         .background {
             RoundedRectangle(cornerRadius: 32)
                 .fill(.customOrange)
@@ -41,6 +56,7 @@ struct AltitudeView: View {
                     }
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
+                
             }
         }
         .contentShape(.rect)
@@ -51,27 +67,36 @@ struct AltitudeView: View {
                 }
             }
         }
+        .onChange(of: altitudeService.absoluteAltitude.displayValue) { old, new in
+            guard old != new  else { return }
+            
+            withAnimation {
+                altitude = new
+            }
+        }
     }
     
     private var altitudeText: some View {
         layout {
-            Text("\(altitudeService.absoluteAltitude.displayValue)")
+            Text("\(altitude)")
                 .contentTransition(.numericText(value: Double(altitudeService.absoluteAltitude.displayValue)))
                 .font(.custom("AkiLines", size: isCompact ? 150 : 360))
                 .minimumScaleFactor(0.3)
+                .lineLimit(1)
             
             Text(altitudeService.absoluteAltitude.formattedUnit(width: .wide))
                 .font(.system(size: isCompact ? 70 : 100).weight(.ultraLight))
-                .padding(.top, isCompact ? -86 : nil)
+                .minimumScaleFactor(0.3)
+                .lineLimit(1)
+                
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .animation(.default, value: altitudeService.absoluteAltitude)
         .foregroundStyle(.offBlack)
-        
     }
 }
 
 #Preview {
     @Previewable @State var isCompact = false
-    AltitudeView(isCompact: $isCompact)
+    @Previewable @State var service = AltitudeService()
+    AltitudeView(service: service, isCompact: $isCompact)
 }

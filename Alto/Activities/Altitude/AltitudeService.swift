@@ -14,13 +14,13 @@ private let logger = Logger(subsystem: "Alto", category: "Altitude Service")
 @MainActor
 @Observable
 final class AltitudeService {
-    private enum TrackedValue: String {
+    enum TrackedValue: String {
         case absoluteAltitude = "altitude"
         case pressure = "pressure"
     }
     
     private(set) var absoluteAltitude = LocalizedLength(meters: 0)
-    private(set) var pressure = Measurement(value: 0, unit: UnitPressure.kilopascals)
+    private(set) var pressure = Measurement(value: 0, unit: UnitPressure.hectopascals)
     
     private(set) var trackingAbsoluteAltitude = false {
         didSet {
@@ -128,7 +128,16 @@ final class AltitudeService {
         CMAltimeter.authorizationStatus()
     }
     
-    func isAvailable() -> Bool {
-        CMAltimeter.isAbsoluteAltitudeAvailable() && CMAltimeter.isRelativeAltitudeAvailable()
+    func avaliableValues() -> [TrackedValue] {
+        switch (CMAltimeter.isAbsoluteAltitudeAvailable(), CMAltimeter.isRelativeAltitudeAvailable()) {
+        case (true, true):
+            return [.absoluteAltitude, .pressure]
+        case (true, false):
+            return [.absoluteAltitude]
+        case (false, true):
+            return [.pressure]
+        default:
+            return []
+        }
     }
 }
