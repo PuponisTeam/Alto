@@ -32,6 +32,7 @@ struct DetailsView: View {
                 PressureTile()
             }
         }
+        .transition(.move(edge: .bottom).combined(with: .scale).combined(with: .opacity))
     }
 }
 
