@@ -9,24 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingDetails = false
+    @State private var showModel3DView: Bool = false
     @State private var changedContainer = false
     @Environment(\.altitudeService) private var alitudeService
     
     @Namespace private var namespace
     
     var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            VStack(spacing: DetailsView.spacing) {
-                AltitudeView(service: alitudeService, isCompact: $showingDetails)
-                    .padding(showingDetails ? [.top, .horizontal] : [])
-                    .padding(showingDetails ? [.horizontal] : [], 18)
+        if showModel3DView {
+            Model3DView(showModel3DView: $showModel3DView)
+        } else {
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
                 
-                if showingDetails {
-                    DetailsView()
-                    Spacer()
+                VStack(spacing: DetailsView.spacing) {
+                    AltitudeView(service: alitudeService, isCompact: $showingDetails)
+                        .padding(showingDetails ? [.top, .horizontal] : [])
+                        .padding(showingDetails ? [.horizontal] : [], 18)
+                    
+                    if showingDetails {
+                        DetailsView(showModel3DView: $showModel3DView)
+                        Spacer()
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct DetailsView: View {
     static let spacing = 20.0
+    @Binding var showModel3DView: Bool
     
     var body: some View {
         Grid(
@@ -19,11 +20,14 @@ struct DetailsView: View {
         ) {
             GridRow {
                 PressureTile()
-                PressureTile()
+                OxygenPressureTile()
             }
             
             GridRow {
-                PressureTile()
+                Model3DTile()
+                    .onTapGesture {
+                        showModel3DView.toggle()
+                    }
                 PressureTile()
             }
             
@@ -37,5 +41,6 @@ struct DetailsView: View {
 }
 
 #Preview {
-    DetailsView()
+    @Previewable @State var showModel3DView: Bool = false
+    DetailsView(showModel3DView: $showModel3DView)
 }

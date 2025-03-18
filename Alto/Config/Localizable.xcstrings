@@ -1,7 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ hPa" : {
+
+    },
     "%lld" : {
+
+    },
+    "As tall as..." : {
 
     },
     "Feet" : {
@@ -70,6 +76,9 @@
         }
       }
     },
+    "Oxygen" : {
+
+    },
     "Pressure" : {
 
     },
@@ -82,6 +91,9 @@
           }
         }
       }
+    },
+    "You're as Alto as a Moai Statue!" : {
+
     }
   },
   "version" : "1.0"

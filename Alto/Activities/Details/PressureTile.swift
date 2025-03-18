@@ -20,7 +20,7 @@ struct PressureTile: View {
                     )
                 )
             )
-            .font(.system(size: 30, weight: .heavy, design: .default))
+            .font(.system(size: 25, weight: .heavy, design: .default))
             .minimumScaleFactor(0.3)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding()
