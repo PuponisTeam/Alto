@@ -7,22 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A55240C02D886FB00089F112 /* Colosseo.usdc in Resources */ = {isa = PBXBuildFile; fileRef = A55240BD2D886FB00089F112 /* Colosseo.usdc */; };
-		A55240C12D886FB00089F112 /* Moai.usdc in Resources */ = {isa = PBXBuildFile; fileRef = A55240BE2D886FB00089F112 /* Moai.usdc */; };
-		A55240C22D886FB00089F112 /* Pyramid.usdc in Resources */ = {isa = PBXBuildFile; fileRef = A55240BF2D886FB00089F112 /* Pyramid.usdc */; };
-		A55240C42D8870290089F112 /* Colosseo.scn in Resources */ = {isa = PBXBuildFile; fileRef = A55240C32D8870290089F112 /* Colosseo.scn */; };
-		A55240C62D88702F0089F112 /* Moai.scn in Resources */ = {isa = PBXBuildFile; fileRef = A55240C52D88702F0089F112 /* Moai.scn */; };
-		A55240C82D8870330089F112 /* Pyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = A55240C72D8870330089F112 /* Pyramid.scn */; };
+		6CFF48A72D8B02E600C1A9ED /* SceneKitAssets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CFF48A62D8B02E600C1A9ED /* SceneKitAssets.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6C0A50DD2D7898C200D023F3 /* Alto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alto.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A55240BD2D886FB00089F112 /* Colosseo.usdc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Colosseo.usdc; sourceTree = "<group>"; };
-		A55240BE2D886FB00089F112 /* Moai.usdc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Moai.usdc; sourceTree = "<group>"; };
-		A55240BF2D886FB00089F112 /* Pyramid.usdc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pyramid.usdc; sourceTree = "<group>"; };
-		A55240C32D8870290089F112 /* Colosseo.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Colosseo.scn; sourceTree = "<group>"; };
-		A55240C52D88702F0089F112 /* Moai.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Moai.scn; sourceTree = "<group>"; };
-		A55240C72D8870330089F112 /* Pyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Pyramid.scn; sourceTree = "<group>"; };
+		6CFF48A62D8B02E600C1A9ED /* SceneKitAssets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = SceneKitAssets.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -60,14 +50,9 @@
 		6C0A50D42D7898C200D023F3 = {
 			isa = PBXGroup;
 			children = (
-				A55240BD2D886FB00089F112 /* Colosseo.usdc */,
-				A55240C32D8870290089F112 /* Colosseo.scn */,
-				A55240BE2D886FB00089F112 /* Moai.usdc */,
-				A55240C52D88702F0089F112 /* Moai.scn */,
-				A55240BF2D886FB00089F112 /* Pyramid.usdc */,
-				A55240C72D8870330089F112 /* Pyramid.scn */,
 				6C0A50DF2D7898C200D023F3 /* Alto */,
 				6C0A50DE2D7898C200D023F3 /* Products */,
+				6CFF48A62D8B02E600C1A9ED /* SceneKitAssets.scnassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,12 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A55240C62D88702F0089F112 /* Moai.scn in Resources */,
-				A55240C02D886FB00089F112 /* Colosseo.usdc in Resources */,
-				A55240C12D886FB00089F112 /* Moai.usdc in Resources */,
-				A55240C22D886FB00089F112 /* Pyramid.usdc in Resources */,
-				A55240C82D8870330089F112 /* Pyramid.scn in Resources */,
-				A55240C42D8870290089F112 /* Colosseo.scn in Resources */,
+				6CFF48A72D8B02E600C1A9ED /* SceneKitAssets.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +275,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Alto/Preview Content\"";
-				DEVELOPMENT_TEAM = 2XSHXS4594;
+				DEVELOPMENT_TEAM = 6N3WR99Z4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Alto/Info.plist;
@@ -330,7 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Alto/Preview Content\"";
-				DEVELOPMENT_TEAM = 2XSHXS4594;
+				DEVELOPMENT_TEAM = 6N3WR99Z4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Alto/Info.plist;

@@ -25,9 +25,6 @@ struct DetailsView: View {
             
             GridRow {
                 Model3DTile()
-                    .onTapGesture {
-                        showModel3DView.toggle()
-                    }
                 PressureTile()
             }
             

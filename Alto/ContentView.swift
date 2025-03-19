@@ -16,22 +16,19 @@ struct ContentView: View {
     @Namespace private var namespace
     
     var body: some View {
-        if showModel3DView {
-            Model3DView(showModel3DView: $showModel3DView)
-        } else {
-            ZStack {
-                Color.black
-                    .ignoresSafeArea()
+        ZStack {
+            Color.black
+                .padding(-100)
+                .ignoresSafeArea()
+            
+            VStack(spacing: DetailsView.spacing) {
+                AltitudeView(service: alitudeService, isCompact: $showingDetails)
+                    .padding(showingDetails ? [.top, .horizontal] : [])
+                    .padding(showingDetails ? [.horizontal] : [], 18)
                 
-                VStack(spacing: DetailsView.spacing) {
-                    AltitudeView(service: alitudeService, isCompact: $showingDetails)
-                        .padding(showingDetails ? [.top, .horizontal] : [])
-                        .padding(showingDetails ? [.horizontal] : [], 18)
-                    
-                    if showingDetails {
-                        DetailsView(showModel3DView: $showModel3DView)
-                        Spacer()
-                    }
+                if showingDetails {
+                    DetailsView(showModel3DView: $showModel3DView)
+                    Spacer()
                 }
             }
         }

@@ -21,6 +21,10 @@ struct LocalizedLength: Equatable {
         Locale.autoupdatingCurrent.measurementSystem == .metric ? metersMeasurement : feetMeasurement
     }
     
+    var metersValue: Double {
+        metersMeasurement.value
+    }
+    
     var value: Double {
         mesurament.value
     }
