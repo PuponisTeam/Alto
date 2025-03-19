@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct Model3DTile: View {
-    @Environment(\.altitudeService) private var altitudeService
+    let altitudeService: AltitudeService
+    @State private var model: ModelView.Model
     @State private var showingFullScreen = false
     @Namespace private var namespace
     
-    private var model: ModelView.Model {
-        switch altitudeService.absoluteAltitude.metersValue {
-        case 0...10: .moai
-        case 10...130: .colosseum
-        default: .pyramid
-        }
+    init(altitudeService: AltitudeService) {
+        self.altitudeService = altitudeService
+        _model = State(wrappedValue: ModelView.Model(altitude: altitudeService.absoluteAltitude.metersValue))
     }
     
     var body: some View {
@@ -40,11 +38,13 @@ struct Model3DTile: View {
             FullScreenModelView(model: model)
                 .navigationTransition(.zoom(sourceID: "model", in: namespace))
         }
+        .onChange(of: altitudeService.absoluteAltitude.value) {
+            model = ModelView.Model(altitude: altitudeService.absoluteAltitude.metersValue)
+        }
     }
 }
 
 #Preview {
-    Model3DTile()
-        .environment(\.altitudeService, .init())
+    Model3DTile(altitudeService: AltitudeService())
 }
 

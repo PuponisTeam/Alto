@@ -14,6 +14,17 @@ struct ModelView: UIViewRepresentable {
         case colosseum = "Colosseum"
         case pyramid = "Pyramid"
         
+        init(altitude: Double) {
+            switch altitude{
+            case 0...10:
+                    self = .moai
+            case 10...130:
+                    self = .colosseum
+            default:
+                    self = .pyramid
+            }
+        }
+        
         var zoomLevel: Float? {
             switch self {
             case .moai:
@@ -35,6 +46,7 @@ struct ModelView: UIViewRepresentable {
     }
     
     let model: Model
+    var zoomOut = false
     var allowsCameraControl = true
     
     var scene: SCNScene? {
@@ -45,7 +57,7 @@ struct ModelView: UIViewRepresentable {
         scene.background.contents = UIColor(white: 1, alpha: 0)
         
         guard let zoomLevel = model.zoomLevel else { return scene }
-        scene.rootNode.position.y += zoomLevel
+        scene.rootNode.position.y = zoomOut ? scene.rootNode.position.y + zoomLevel : 0
         return scene
     }
     
@@ -59,5 +71,7 @@ struct ModelView: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: UIViewType, context: Context) { }
+    func updateUIView(_ uiView: SCNView, context: Context) {
+        uiView.scene = scene
+    }
 }

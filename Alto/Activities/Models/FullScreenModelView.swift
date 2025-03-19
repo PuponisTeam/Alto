@@ -14,7 +14,7 @@ struct FullScreenModelView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                ModelView(model: model)
+                ModelView(model: model, zoomOut: true)
                     .background(Color.offBlack.noiseEffect())
                     .ignoresSafeArea()
                 

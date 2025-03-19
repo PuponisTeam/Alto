@@ -12,6 +12,7 @@ import SwiftUI
 struct DetailsView: View {
     static let spacing = 20.0
     @Binding var showModel3DView: Bool
+    @Environment(\.altitudeService) private var altitudeService
     
     var body: some View {
         Grid(
@@ -24,7 +25,7 @@ struct DetailsView: View {
             }
             
             GridRow {
-                Model3DTile()
+                Model3DTile(altitudeService: altitudeService)
                 PressureTile()
             }
             
