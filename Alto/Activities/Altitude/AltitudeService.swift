@@ -106,7 +106,7 @@ final class AltitudeService {
             return
         }
         
-        pressure.value = data.pressure.doubleValue
+        pressure.value = data.pressure.doubleValue * 10.0
     }
     
     func stopPressureUpdates() {

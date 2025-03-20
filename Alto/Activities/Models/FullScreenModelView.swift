@@ -17,11 +17,6 @@ struct FullScreenModelView: View {
                 ModelView(model: model, zoomOut: true)
                     .background(Color.offBlack.noiseEffect())
                     .ignoresSafeArea()
-                
-                Text("You're as Alto as a Moai Statue!")
-                    .foregroundStyle(.white)
-                    .font(.title2)
-                    .bold()
             }
             .toolbar {
                 Button {
