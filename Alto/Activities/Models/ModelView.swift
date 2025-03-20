@@ -57,7 +57,7 @@ struct ModelView: UIViewRepresentable {
         scene.background.contents = UIColor(white: 1, alpha: 0)
         
         guard let zoomLevel = model.zoomLevel else { return scene }
-        scene.rootNode.position.y = zoomOut ? scene.rootNode.position.y + zoomLevel : 0
+        scene.rootNode.position.y = zoomOut ? scene.rootNode.position.y + zoomLevel : 3
         return scene
     }
     

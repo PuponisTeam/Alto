@@ -13,7 +13,7 @@ struct OxygenPressureTile: View {
     var body: some View {
         Tile(.half) {
             Text(
-                ("\(altitudeService.oxygenPressure.formatted()) hPa")
+                "\(altitudeService.oxygenPressure.formatted()) hPa"
             )
             .font(.system(size: 25, weight: .heavy, design: .default))
             .minimumScaleFactor(0.3)
@@ -22,6 +22,7 @@ struct OxygenPressureTile: View {
             .foregroundStyle(.white)
         } background: {
             Color.blue
+                .noiseEffect()
         } label: {
             Label("Oxygen", systemImage: "wind")
                 .foregroundStyle(.white)

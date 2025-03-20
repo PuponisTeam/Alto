@@ -21,6 +21,7 @@ final class AltitudeService {
     
     private(set) var absoluteAltitude = LocalizedLength(meters: 0)
     private(set) var pressure = Measurement(value: 0, unit: UnitPressure.hectopascals)
+    
     var oxygenPressure: Double {
         let atmosphericPressureAtAltitude = pow(0.9877, absoluteAltitude.value / 100)
         return floor(atmosphericPressureAtAltitude * 0.21 * 760 * 1.333224)

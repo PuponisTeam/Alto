@@ -26,12 +26,22 @@ struct DetailsView: View {
             
             GridRow {
                 Model3DTile(altitudeService: altitudeService)
-                PressureTile()
-            }
-            
-            GridRow {
-                PressureTile()
-                PressureTile()
+                
+                Tile(.half) {
+                    Text("5")
+                    .font(.system(size: 25, weight: .heavy, design: .default))
+                    .minimumScaleFactor(0.3)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding()
+                    .foregroundStyle(.white)
+                } background: {
+                    Color.red
+                        .noiseEffect()
+                } label: {
+                    Label("UV Index", systemImage: "sun.max.fill")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                }
             }
         }
         .transition(.move(edge: .bottom).combined(with: .scale).combined(with: .opacity))

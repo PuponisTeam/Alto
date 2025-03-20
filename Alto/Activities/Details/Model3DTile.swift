@@ -29,7 +29,7 @@ struct Model3DTile: View {
                 Color.offBlack
                     .noiseEffect()
             } label: {
-                Label("As tall as...", systemImage: "building.columns.fill")
+                Label("As tall as", systemImage: "building.columns.fill")
                     .foregroundStyle(.white)
                     .font(.headline)
             }

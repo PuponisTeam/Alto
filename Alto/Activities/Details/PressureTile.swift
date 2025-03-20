@@ -27,6 +27,7 @@ struct PressureTile: View {
             .foregroundStyle(.white)
         } background: {
             Color.indigo
+                .noiseEffect()
         } label: {
             Label("Pressure", systemImage: "barometer")
                 .foregroundStyle(.white)
