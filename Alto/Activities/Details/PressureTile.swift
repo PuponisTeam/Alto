@@ -16,7 +16,7 @@ struct PressureTile: View {
                 altitudeService.pressure.formatted(
                     .measurement(
                         width: .abbreviated,
-                        usage: .barometric
+                        usage: .asProvided
                     )
                 )
             )
