@@ -26,10 +26,10 @@ struct ContentView: View {
                     .padding(showingDetails ? [.top, .horizontal] : [])
                     .padding(showingDetails ? [.horizontal] : [], 18)
                 
-                if showingDetails {
-                    DetailsView(showModel3DView: $showModel3DView)
-                    Spacer()
-                }
+//                if showingDetails {
+//                    DetailsView(showModel3DView: $showModel3DView)
+//                    Spacer()
+//                }
             }
         }
     }
